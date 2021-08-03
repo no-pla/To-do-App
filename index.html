@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TO-DO</title>
+    <script
+      src="https://kit.fontawesome.com/a222ec40a7.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>TODO</h1>
+      </header>
+      <nav>
+        <ul>
+          <li><button class="see-all">전체</button></li>
+          <li><button class="see-continue">진행 중인 일</button></li>
+          <li><button class="see-done">완료한 일</button></li>
+        </ul>
+      </nav>
+      <ul class="todo-list"></ul>
+      <div class="open-modal">
+        <button>➕</button>
+      </div>
+    </div>
+    <div class="modal hidden">
+      <h3>할 일을 입력해 주세요</h3>
+      <form>
+        <input type="text" name="" id="" />
+        <div class="btns">
+          <button>추가하기</button>
+          <input type="button" class="cancel" value="취소" />
+        </div>
+      </form>
+    </div>
+  </body>
+  <script src="js/script.js"></script>
+</html>
