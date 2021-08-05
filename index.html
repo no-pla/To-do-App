@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TO-DO</title>
-    <!-- <script
+    <script
       src="https://kit.fontawesome.com/a222ec40a7.js"
       crossorigin="anonymous"
-    ></script> -->
+    ></script>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>TODO</h1>
+        <h1>TO-DO</h1>
       </header>
       <nav>
         <ul>
@@ -23,20 +23,24 @@
           <li><button class="see-done">완료한 일</button></li>
         </ul>
       </nav>
-      <ul class="todo-list"></ul>
-      <div class="open-modal">
-        <button>➕</button>
-      </div>
-    </div>
-    <div class="modal hidden">
-      <h3>할 일을 입력해 주세요</h3>
-      <form>
-        <input type="text" />
-        <div class="btns">
-          <button>추가하기</button>
-          <input type="button" class="cancel" value="취소" />
+      <main>
+        <ul class="todo-list"></ul>
+        <div class="open-modal">
+          <button><i class="fas fa-plus"></i></button>
         </div>
-      </form>
+      </main>
+      <div class="modal-container hidden">
+        <div class="modal hidden">
+          <h3>할 일을 입력해 주세요.</h3>
+          <form>
+            <input type="text" placeholder="할 일을 입력해 주세요." />
+            <div class="btns">
+              <button>추가하기</button>
+              <input type="button" class="cancel" value="취소" />
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
   <script src="js/script.js"></script>
