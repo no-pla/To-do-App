@@ -15,9 +15,14 @@ function deleteTodo(event) {
   const li = event.target.parentElement;
 
   li.classList.add("del");
-  let location = todos.indexOf("del");
 
-  todos.splice(location, 1);
+  for (let i = 0; i < todos.length; i++) {
+    if (todos[i].classList.contains("del")) {
+      let location = i;
+      todos.splice(location, 1);
+    }
+  }
+
   li.remove();
 }
 
@@ -50,11 +55,13 @@ function editTodo(event) {
   targetLocation.innerHTML = `<input type="text" class="change-text" value="${targetText}" />`;
 
   let input = text.parentNode.querySelector("input[type='text']");
+
   input.focus();
 
   let val = input.value;
   input.value = "";
   input.value = val;
+
   btn.addEventListener("click", addEditTodo);
 }
 
@@ -66,9 +73,12 @@ function addTodo(event) {
 
   if ($input.value !== "") {
     makeTodo();
+
     $input.value = "";
     $modal.classList.replace("set-modal", "hidden");
     container.style.display = "none";
+
+    sortLast();
   }
 }
 
@@ -115,12 +125,20 @@ function makeTodo() {
   editBtn.addEventListener("click", editTodo);
   delBtn.addEventListener("click", deleteTodo);
   input.addEventListener("change", controlFinishTodo);
+  $continue.addEventListener("click", seeContinueTodo);
+  $done.addEventListener("click", seeDoneTodo);
+  $all.addEventListener("click", seeAllTodo);
 }
 
 function controlFinishTodo(event) {
-  const editBtn = event.target.parentElement.querySelector(".edit");
-  const delBtn = event.target.parentElement.querySelector(".delete");
+  for (let i = 0; i < todos.length; i++) {
+    if (todos[i].className === "done") {
+      printTodo(todos[i]);
+    }
+  }
   const list = event.target.parentElement;
+  const editBtn = list.querySelector(".edit");
+  const delBtn = list.querySelector(".delete");
   const text = list.querySelector("label");
 
   if (!list.classList.contains("done")) {
@@ -134,15 +152,47 @@ function controlFinishTodo(event) {
     delBtn.classList.add("hidden");
     text.classList.remove("finish");
   }
-  // 완료한 일 맨 아래로 내리기
+  sortLast();
+}
+
+// 진행 중인 일/ 완료한 일
+function sortLast() {
   for (let i = 0; i < todos.length; i++) {
     if (todos[i].className === "done") {
       printTodo(todos[i]);
     }
   }
 }
+function sortDone(status, display) {
+  const continueTodo = todos.filter((elem) => elem.classList.contains(status));
+  for (let i = 0; i < continueTodo.length; i++) {
+    let $done = continueTodo[i];
+    $done.style.display = display;
+  }
+}
 
-// 진행 중인 일/ 완료한 일
+function sortContinue(status, display) {
+  const doneTodo = todos.filter((elem) => elem.classList.contains(status));
+  for (let i = 0; i < doneTodo.length; i++) {
+    let $continue = doneTodo[i];
+    $continue.style.display = display;
+  }
+}
+
+function seeAllTodo() {
+  sortDone("done", "flex");
+  sortContinue("continue", "flex");
+}
+
+function seeDoneTodo() {
+  sortDone("done", "flex");
+  sortContinue("continue", "none");
+}
+
+function seeContinueTodo() {
+  sortDone("done", "none");
+  sortContinue("continue", "flex");
+}
 
 // 모달 관련
 function openModal() {
